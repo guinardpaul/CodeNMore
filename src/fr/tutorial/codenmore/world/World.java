@@ -86,4 +86,8 @@ public class World {
 		return height;
 	}
 
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
 }

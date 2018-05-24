@@ -2,6 +2,7 @@ package fr.tutorial.codenmore;
 
 import fr.tutorial.codenmore.gfx.GameCamera;
 import fr.tutorial.codenmore.input.KeyManager;
+import fr.tutorial.codenmore.input.MouseManager;
 import fr.tutorial.codenmore.world.World;
 
 public class Handler {
@@ -19,6 +20,10 @@ public class Handler {
 
 	public int getHeight() {
 		return game.getHeight();
+	}
+
+	public MouseManager getMouseManager() {
+		return game.getMouseManager();
 	}
 
 	public GameCamera getGameCamera() {
