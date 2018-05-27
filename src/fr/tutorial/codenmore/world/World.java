@@ -5,7 +5,9 @@ import java.awt.Graphics;
 import fr.tutorial.codenmore.Handler;
 import fr.tutorial.codenmore.entities.EntityManager;
 import fr.tutorial.codenmore.entities.creatures.Player;
+import fr.tutorial.codenmore.entities.statics.Rock;
 import fr.tutorial.codenmore.entities.statics.Tree;
+import fr.tutorial.codenmore.items.ItemManager;
 import fr.tutorial.codenmore.tiles.Tile;
 import fr.tutorial.codenmore.utils.Utils;
 
@@ -17,17 +19,24 @@ public class World {
 	private int[][] tiles;
 	// Entity Manager
 	private EntityManager entityManager;
+	private ItemManager itemManager;
 
 	public World(Handler handler, String path) {
 		this.handler = handler;
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		itemManager = new ItemManager(handler);
 		loadWorld(path);
-		entityManager.addEntity(new Tree(handler, 150, 150));
+		entityManager.addEntity(new Tree(handler, 120, 150));
+		entityManager.addEntity(new Tree(handler, 120, 350));
+		entityManager.addEntity(new Tree(handler, 120, 550));
+
+		entityManager.addEntity(new Rock(handler, 150, 400));
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
 	}
 
 	public void tick() {
+		itemManager.tick();
 		entityManager.tick();
 	}
 
@@ -46,6 +55,8 @@ public class World {
 						(int) (y * Tile.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
 			}
 		}
+		// Items
+		itemManager.render(g);
 		// Entities
 		entityManager.render(g);
 	}
@@ -76,6 +87,22 @@ public class World {
 				tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
 			}
 		}
+	}
+
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+
+	public ItemManager getItemManager() {
+		return itemManager;
+	}
+
+	public void setItemManager(ItemManager itemManager) {
+		this.itemManager = itemManager;
 	}
 
 	public int getWidth() {

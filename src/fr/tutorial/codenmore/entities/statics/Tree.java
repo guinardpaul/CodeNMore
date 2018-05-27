@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import fr.tutorial.codenmore.Handler;
 import fr.tutorial.codenmore.gfx.Assets;
+import fr.tutorial.codenmore.items.Item;
 import fr.tutorial.codenmore.tiles.Tile;
 
 public class Tree extends StaticEntity {
@@ -24,6 +25,11 @@ public class Tree extends StaticEntity {
 	public void render(Graphics g) {
 		g.drawImage(Assets.tree, (int) (x - handler.getGameCamera().getxOffset()),
 				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+	}
+
+	@Override
+	public void die() {
+		handler.getWorld().getItemManager().addItem(Item.woodItem.createNew((int) x, (int) y));
 	}
 
 }

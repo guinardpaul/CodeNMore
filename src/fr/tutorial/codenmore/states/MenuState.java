@@ -16,9 +16,9 @@ public class MenuState extends State {
 		super(handler);
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
-		
+
 		uiManager.addObject(new UIImageButton(200, 200, 128, 64, Assets.start_button, new ClickListener() {
-			
+
 			@Override
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
@@ -36,6 +36,8 @@ public class MenuState extends State {
 		// handler.getMouseManager().isRightPressed()) {
 		// getState().setState(handler.getGame().gameState);
 		// }
+		handler.getMouseManager().setUIManager(null);
+		State.setState(handler.getGame().gameState);
 	}
 
 	@Override

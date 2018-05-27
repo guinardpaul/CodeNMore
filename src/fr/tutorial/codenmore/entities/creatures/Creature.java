@@ -6,18 +6,15 @@ import fr.tutorial.codenmore.tiles.Tile;
 
 public abstract class Creature extends Entity {
 
-	public static final int DEFAULT_HEALTH = 10;
 	public static final float DEFAULT_SPEED = 3.0f;
 	public static final int DEFAULT_CREATURE_WIDTH = 128;
 	public static final int DEFAULT_CREATURE_HEIGHT = 128;
 
-	protected int health;
 	protected float speed;
 	protected float xMove, yMove;
 
 	public Creature(Handler handler, float x, float y, int width, int height) {
 		super(handler, x, y, width, height);
-		health = DEFAULT_HEALTH;
 		speed = DEFAULT_SPEED;
 		xMove = 0;
 		yMove = 0;
@@ -96,14 +93,6 @@ public abstract class Creature extends Entity {
 
 	public void setyMove(float yMove) {
 		this.yMove = yMove;
-	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
 	}
 
 	public float getSpeed() {
