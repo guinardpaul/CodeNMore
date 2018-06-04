@@ -7,6 +7,7 @@ import fr.tutorial.codenmore.entities.EntityManager;
 import fr.tutorial.codenmore.entities.creatures.Player;
 import fr.tutorial.codenmore.entities.statics.Rock;
 import fr.tutorial.codenmore.entities.statics.Tree;
+import fr.tutorial.codenmore.factory.Factory;
 import fr.tutorial.codenmore.items.ItemManager;
 import fr.tutorial.codenmore.tiles.Tile;
 import fr.tutorial.codenmore.utils.Utils;
@@ -17,22 +18,30 @@ public class World {
 	private int width, height;
 	private int spawnX, spawnY;
 	private int[][] tiles;
-	// Entity Manager
+	// Entities
 	private EntityManager entityManager;
+	// Item
 	private ItemManager itemManager;
+	// Factory
+	private Factory factory;
 
 	public World(Handler handler, String path) {
 		this.handler = handler;
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
 		itemManager = new ItemManager(handler);
-		loadWorld(path);
-		entityManager.addEntity(new Tree(handler, 120, 150));
-		entityManager.addEntity(new Tree(handler, 120, 350));
-		entityManager.addEntity(new Tree(handler, 120, 550));
+		// Temporary code!
+		entityManager.addEntity(new Tree(handler, 132, 250));
+		entityManager.addEntity(new Rock(handler, 132, 450));
+		entityManager.addEntity(new Rock(handler, 350, 300));
+		entityManager.addEntity(new Rock(handler, 400, 345));
+		entityManager.addEntity(new Tree(handler, 625, 325));
 
-		entityManager.addEntity(new Rock(handler, 150, 400));
+		loadWorld(path);
+
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
+		// factory
+		factory = new Factory(handler, 70, 70);
 	}
 
 	public void tick() {
@@ -41,7 +50,6 @@ public class World {
 	}
 
 	public void render(Graphics g) {
-		// render only tiles in game camera
 		int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILE_WIDTH);
 		int xEnd = (int) Math.min(width,
 				(handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILE_WIDTH + 1);
@@ -59,18 +67,18 @@ public class World {
 		itemManager.render(g);
 		// Entities
 		entityManager.render(g);
+		// Factory
+		factory.render(g);
 	}
 
 	public Tile getTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) {
-			return Tile.grassTile;
-		}
+		if (x < 0 || y < 0 || x >= width || y >= height)
+			return Tile.GRASS;
 
-		Tile tile = Tile.tiles[tiles[x][y]];
-		if (tile == null) {
-			return Tile.waterTile;
-		}
-		return tile;
+		Tile t = Tile.tiles[tiles[x][y]];
+		if (t == null)
+			return Tile.DIRT;
+		return t;
 	}
 
 	private void loadWorld(String path) {
@@ -89,6 +97,18 @@ public class World {
 		}
 	}
 
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
 	public Handler getHandler() {
 		return handler;
 	}
@@ -103,18 +123,6 @@ public class World {
 
 	public void setItemManager(ItemManager itemManager) {
 		this.itemManager = itemManager;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public EntityManager getEntityManager() {
-		return entityManager;
 	}
 
 }

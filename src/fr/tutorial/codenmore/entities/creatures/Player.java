@@ -9,6 +9,7 @@ import fr.tutorial.codenmore.entities.Entity;
 import fr.tutorial.codenmore.gfx.Animation;
 import fr.tutorial.codenmore.gfx.Assets;
 import fr.tutorial.codenmore.inventory.Inventory;
+import fr.tutorial.codenmore.items.Item;
 
 public class Player extends Creature {
 
@@ -30,6 +31,10 @@ public class Player extends Creature {
 		animRight = new Animation(500, Assets.player_right);
 
 		inventory = new Inventory(handler);
+
+		// Temporary inventory code
+		inventory.addItem(Item.rockItem.createNew(10));
+		inventory.addItem(Item.woodItem.createNew(20));
 	}
 
 	@Override
@@ -124,8 +129,10 @@ public class Player extends Creature {
 
 		// Collision rectangle
 		// g.setColor(Color.RED);
-		// g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-		// (int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width,
+		// g.fillRect((int) (x + bounds.x -
+		// handler.getGameCamera().getxOffset()),
+		// (int) (y + bounds.y - handler.getGameCamera().getyOffset()),
+		// bounds.width,
 		// bounds.height);
 	}
 

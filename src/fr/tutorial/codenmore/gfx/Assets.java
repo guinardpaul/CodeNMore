@@ -21,6 +21,7 @@ public class Assets {
 	public static BufferedImage player_standing_still;
 	public static BufferedImage[] player_down, player_up, player_left, player_right;
 	public static BufferedImage inventoryScreen;
+	public static BufferedImage factory;
 
 	public static BufferedImage[] start_button;
 
@@ -61,6 +62,8 @@ public class Assets {
 		player_right[3] = sheet.crop(WIDTH * 6, HEIGHT * 14, WIDTH * 2, HEIGHT * 2);
 
 		player_standing_still = sheet.crop(0, HEIGHT * 8, WIDTH * 2, HEIGHT * 2);
+
+		factory = sheet.crop(WIDTH * 3, 0, WIDTH, HEIGHT);
 
 		dirt = sheet.crop(0, HEIGHT * 2, WIDTH, HEIGHT);
 		water = sheet.crop(WIDTH * 2, HEIGHT * 2, WIDTH, HEIGHT);

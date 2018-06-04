@@ -6,11 +6,12 @@ import java.awt.image.BufferedImage;
 public class Tile {
 
 	public static Tile[] tiles = new Tile[256];
-	public static Tile grassTile = new GrassTile(0);
-	public static Tile dirtTile = new DirtTile(1);
-	public static Tile wallTile = new WallTile(2);
-	public static Tile waterTile = new WaterTile(3);
-	public static Tile rockTile = new RockTile(4);
+
+	public static Tile GRASS = new GrassTile(0);
+	public static Tile DIRT = new DirtTile(1);
+	public static Tile WALL = new WallTile(2);
+	public static Tile WATER = new WaterTile(3);
+	public static Tile ROCK = new RockTile(4);
 
 	public static final int TILE_WIDTH = 64, TILE_HEIGHT = 64;
 
@@ -25,7 +26,6 @@ public class Tile {
 	}
 
 	public void tick() {
-
 	}
 
 	public void render(Graphics g, int x, int y) {
