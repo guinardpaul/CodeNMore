@@ -5,9 +5,9 @@ import java.awt.Graphics;
 import fr.tutorial.codenmore.Handler;
 import fr.tutorial.codenmore.entities.EntityManager;
 import fr.tutorial.codenmore.entities.creatures.Player;
+import fr.tutorial.codenmore.entities.statics.Factory;
 import fr.tutorial.codenmore.entities.statics.Rock;
 import fr.tutorial.codenmore.entities.statics.Tree;
-import fr.tutorial.codenmore.factory.Factory;
 import fr.tutorial.codenmore.items.ItemManager;
 import fr.tutorial.codenmore.tiles.Tile;
 import fr.tutorial.codenmore.utils.Utils;
@@ -23,7 +23,7 @@ public class World {
 	// Item
 	private ItemManager itemManager;
 	// Factory
-	private Factory factory;
+	// private Factory factory;
 
 	public World(Handler handler, String path) {
 		this.handler = handler;
@@ -35,13 +35,13 @@ public class World {
 		entityManager.addEntity(new Rock(handler, 350, 300));
 		entityManager.addEntity(new Rock(handler, 400, 345));
 		entityManager.addEntity(new Tree(handler, 625, 325));
-
+		entityManager.addEntity(new Factory(handler, 70, 70));
 		loadWorld(path);
 
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
 		// factory
-		factory = new Factory(handler, 70, 70);
+		// factory = new Factory(handler, 70, 70);
 	}
 
 	public void tick() {
@@ -68,7 +68,7 @@ public class World {
 		// Entities
 		entityManager.render(g);
 		// Factory
-		factory.render(g);
+		// factory.render(g);
 	}
 
 	public Tile getTile(int x, int y) {
